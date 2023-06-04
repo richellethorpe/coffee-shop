@@ -6,7 +6,7 @@ class InventoryControl extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      formVisibleOnPage: false
+      formVisibleOnPage: false,
       mainCoffeeList: []
     };
     this.handleClick = this.handleClick.bind(this);
@@ -18,11 +18,17 @@ class InventoryControl extends React.Component{
     }));
   }
 
+  handleAddingNewCoffeeToList = (newCoffee) => {
+    const newMainCoffeeList = this.state.mainCoffeeList.concat(newCoffee);
+    this.setState({mainCoffeeList: newMainCoffeeList,
+      formVisibleOnPage: false});
+  }
+
   render(){
     let currentlyVisibleState= null;
     let buttonText= null;
     if (this.state.formVisibleOnPage){
-      currentlyVisibleState = <NewCoffeeOrder />
+      currentlyVisibleState = <NewCoffeeOrder onNewCoffeeCreation= {this.handleAddingNewCoffeeToList}/>
       buttonText= "Return to Coffee List"
     }else{
       currentlyVisibleState= <CoffeeList coffeeList={this.state.mainCoffeeList}/>

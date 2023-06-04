@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function NewCoffeeOrder(props){
   function handleNewCoffeeOrder(event){
@@ -34,5 +35,8 @@ function NewCoffeeOrder(props){
     </>
   );
 }
+NewCoffeeOrder.PropTypes = {
+  onNewCoffeeCreation: PropTypes.func
+};
 
 export default NewCoffeeOrder;
