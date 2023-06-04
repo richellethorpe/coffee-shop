@@ -24,6 +24,10 @@ function NewCoffeeOrder(props){
           type= 'number'
           name="price"
           placeholder="price " />
+        <input
+          type= 'number'
+          name="quantity"
+          placeholder="quantity" />
 
       <button type="submit">purchase</button>
       </form>
