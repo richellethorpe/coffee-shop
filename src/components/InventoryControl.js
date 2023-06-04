@@ -7,6 +7,7 @@ class InventoryControl extends React.Component{
     super(props);
     this.state = {
       formVisibleOnPage: false
+      mainCoffeeList: []
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -24,7 +25,7 @@ class InventoryControl extends React.Component{
       currentlyVisibleState = <NewCoffeeOrder />
       buttonText= "Return to Coffee List"
     }else{
-      currentlyVisibleState= <CoffeeList />
+      currentlyVisibleState= <CoffeeList coffeeList={this.state.mainCoffeeList}/>
       buttonText= "Add Coffee"
       
     }

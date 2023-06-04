@@ -29,7 +29,7 @@ function NewCoffeeOrder(props){
           name="quantity"
           placeholder="quantity" />
 
-      <button type="submit">purchase</button>
+      <button type="submit">Purchase</button>
       </form>
     </>
   );
