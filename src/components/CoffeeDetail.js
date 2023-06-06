@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function CoffeeDetail(props){
-  const { coffee } = props;
+  const { coffee, onClickingDelete } = props;
 
   return (
     <>
@@ -11,6 +11,7 @@ function CoffeeDetail(props){
       <li>{coffee.origin}</li>
       <li>{coffee.roast}</li>
       <li>{coffee.quantity}</li>
+      <button onClick={()=> onClickingDelete(coffee.id) }>DELETE</button>
       <hr/>
     </>
   );
