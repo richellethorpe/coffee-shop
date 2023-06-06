@@ -5,12 +5,10 @@ import PropTypes from "prop-types"
 function Coffee(props){
   return(
     <>
-    <h2>{props.name} = ${props.price} per pound</h2>
-    <li>{props.origin}</li>
-    <li>{props.roast}</li>
-    <li>{props.roast}</li>
-    <li>{props.quantity}</li>
+      <div onClick= {() => props.whenCoffeeClicked(props.id)}>
+        <h2>{props.name} = ${props.price} per pound</h2>
 
+      </div>
     </>
   )
 }

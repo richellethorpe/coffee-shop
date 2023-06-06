@@ -4,12 +4,12 @@ import { v4 } from "uuid";
 
 function NewCoffeeOrder(props){
   function handleNewCoffeeOrder(event){
-    event.prevenDefault();
+    event.preventDefault();
     props.onNewCoffeeCreation({
       name: event.target.name.value, 
       origin: event.target.origin.value, 
       roast: event.target.roast.value, 
-      price: parseInt(event.target.price.value),
+      price: event.target.price.value,
       quantity: event.target.quantity.value,
       id: v4()
     });
@@ -31,11 +31,11 @@ function NewCoffeeOrder(props){
           name="roast"
           placeholder="roast" />  
         <input
-          type= 'number'
+          type= 'text'
           name="price"
           placeholder="price " />
         <input
-          type= 'number'
+          type= 'text'
           name="quantity"
           placeholder="quantity" />
 
