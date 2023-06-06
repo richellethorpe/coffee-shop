@@ -1,9 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { v4 } from "uuid";
 
 function NewCoffeeOrder(props){
   function handleNewCoffeeOrder(event){
     event.prevenDefault();
+    props.onNewCoffeeCreation({
+      name: event.target.name.value, 
+      origin: event.target.origin.value, 
+      roast: event.target.roast.value, 
+      price: parseInt(event.target.price.value),
+      quantity: event.target.quantity.value,
+      id: v4()
+    });
   }
 
   return(
@@ -35,7 +44,7 @@ function NewCoffeeOrder(props){
     </>
   );
 }
-NewCoffeeOrder.PropTypes = {
+NewCoffeeOrder.propTypes = {
   onNewCoffeeCreation: PropTypes.func
 };
 

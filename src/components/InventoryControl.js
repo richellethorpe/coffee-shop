@@ -20,15 +20,17 @@ class InventoryControl extends React.Component{
 
   handleAddingNewCoffeeToList = (newCoffee) => {
     const newMainCoffeeList = this.state.mainCoffeeList.concat(newCoffee);
-    this.setState({mainCoffeeList: newMainCoffeeList,
-      formVisibleOnPage: false});
+    this.setState({
+      newMainCoffeeList: newMainCoffeeList,
+      formVisibleOnPage: false
+    });
   }
 
   render(){
     let currentlyVisibleState= null;
     let buttonText= null;
     if (this.state.formVisibleOnPage){
-      currentlyVisibleState = <NewCoffeeOrder onNewCoffeeCreation= {this.handleAddingNewCoffeeToList}/>
+      currentlyVisibleState = <NewCoffeeOrder onNewCoffeeCreation= {this.handleAddingNewCoffeeToList}/>;
       buttonText= "Return to Coffee List"
     }else{
       currentlyVisibleState= <CoffeeList coffeeList={this.state.mainCoffeeList}/>
@@ -43,3 +45,5 @@ class InventoryControl extends React.Component{
     );
   }
 }
+
+export default InventoryControl;
