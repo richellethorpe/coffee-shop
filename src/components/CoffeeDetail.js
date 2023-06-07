@@ -10,7 +10,11 @@ function CoffeeDetail(props){
       <h2>{coffee.name} at ${coffee.price} per lb.</h2>
       <li>{coffee.origin}</li>
       <li>{coffee.roast}</li>
-      <li>{coffee.quantity}</li>
+      <button>-</button>
+      <span>0</span>
+      <button>+</button>
+
+      <hr/>
       <button onClick={()=> onClickingDelete(coffee.id) }>DELETE</button>
       <hr/>
     </>

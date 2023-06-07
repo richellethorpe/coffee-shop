@@ -10,7 +10,6 @@ function NewCoffeeOrder(props){
       origin: event.target.origin.value, 
       roast: event.target.roast.value, 
       price: event.target.price.value,
-      quantity: event.target.quantity.value,
       id: v4()
     });
   }
@@ -34,10 +33,6 @@ function NewCoffeeOrder(props){
           type= 'text'
           name="price"
           placeholder="price " />
-        <input
-          type= 'text'
-          name="quantity"
-          placeholder="quantity" />
 
       <button type="submit">Purchase</button>
       </form>
