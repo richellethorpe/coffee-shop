@@ -7,18 +7,22 @@
 ## Technologies Used
 
 - React
-- CSHTML
-- .NET 6
-- ASP.NET Core
 - Markdown
-- Entity Framework Core
+- JSX
 
 ## Description
 
-- This application will allow hair salon owners to add stylists when they are hired, see the entire list of stylists that work for the salon, as well as their clients and any other details pertaining to the stylist. It will also allow new clients to be added to the stylists over time. 
+- This application will allow the user to view coffee inventory of a fictional coffee shop called Central Perk. The user will be able to add bulk coffee in burlap sacks that will udpdate coffee inventory in pounds. The user will also be able to deplete inventory. 
 
 ## Setup/Installation Requirements
 
+1. Clone repository to desired location on your computer.
+2. Navigate to project directory central-perk.
+3. Install all dependancies with `npm install`.
+4. Run program with `npm start`.
+
+
+## Component Tree Diagram
 
 ## Known Bugs
 
