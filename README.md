@@ -23,7 +23,7 @@
 
 
 ## Component Tree Diagram
-![coffee shop](coffee-shop.drawio.png)
+<img src = (./img/"coffee-shop.drawio.png") />
 ## Known Bugs
 
 - No known bugs.
