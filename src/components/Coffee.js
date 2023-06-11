@@ -8,7 +8,7 @@ function Coffee(props){
     <>
       <div onClick= {() => props.whenCoffeeClicked(props.id)}>
         <h2>{props.name} = ${props.price} per pound</h2>
-        <h3>Amount Available: {(coffee.amount === 0) ? 'Unavailable, 0 in stock' : coffee.amount} pounds available</h3>
+        <h3>Amount Available: {(props.amount === 0) ? 'Unavailable, 0 in stock' : props.amount} pounds available</h3>
         <button onClick={() => props.sellPound(props.id)}>Sell pound</button>
       </div>
     </>
