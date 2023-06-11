@@ -2,6 +2,7 @@ import React from "react";
 import CoffeeList from './CoffeeList';
 import NewCoffeeOrder from "./NewCoffeeOrder";
 import CoffeeDetail from "./CoffeeDetail";
+import EditCoffeeForm from "./EditCoffeeForm";
 
 class InventoryControl extends React.Component{
   constructor(props){
@@ -9,20 +10,23 @@ class InventoryControl extends React.Component{
     this.state = {
       formVisibleOnPage: false,
       mainCoffeeList: [],
-      selectedCoffee: null
+      selectedCoffee: null,
+      editing: false
     };
   }
 
   handleClick = () => {
-    if (this.state.selectedCoffee !=null) {
+    if (this.state.selectedCoffee != null) {
       this.setState({
         formVisibleOnPage: false,
-        selectedCoffee: null
-      })
+        selectedCoffee: null,
+        editing: false
+      });
+    } else {
+      this.setState(prevState => ({
+        formVisibleOnPage: !prevState.formVisibleOnPage,
+      }));
     }
-    this.setState(prevState => ({
-      formVisibleOnPage: !prevState.formVisibleOnPage
-    }));
   }
 
   handleAddingNewCoffeeToList = (newCoffee) => {
@@ -46,11 +50,47 @@ class InventoryControl extends React.Component{
     });
   }
 
+  handleDepletingInventory = (id)=> {   
+    const selectedCoffee = this.state.mainInventoryList.filter(item => item.id === id)[0];
+    const reductedCoffee = { ...selectedCoffee, amount: (selectedCoffee.amount === 0) ? 0 : selectedCoffee.amount - 1 };
+    this.setState({ selectedCoffee: selectedCoffee });
+    const editedMainCoffeeList = this.state.mainCoffeeList
+      .filter(coffee => coffee.id !== reductedCoffee.id)
+      .concat(reductedCoffee);
+    this.setState({
+      mainCoffeeList: editedMainCoffeeList,
+      editing: false,
+      selectedCoffee: null
+    });
+  } 
+
+  handleEditingCoffeeInList = (coffeeToEdit) => {
+    const editedMainCoffeeList = this.state.mainCoffeeList
+      .filter(coffee => coffee.id !== this.state.selectedCoffee.id)
+      .concat(coffeeToEdit);
+    this.setState({
+      mainCoffeeList: editedMainCoffeeList,
+      editing: false,
+      selectedItem: null
+    });
+  }
+
+
+  handleEditClick = () => {
+    this.setState({ editing: true });
+  }
+
   render(){
     let currentlyVisibleState= null;
     let buttonText= null;
-    if (this.state.selectedCoffee != null){
-      currentlyVisibleState = <CoffeeDetail coffee ={this.state.selectedCoffee} onClickingDelete= {this.handleDeletingCoffee} />
+
+    if (this.state.editing){
+      currentlyVisibleState= <EditCoffeeForm coffee={this.state.selectedCoffee} onClickingEdit={this.handleEditingCoffeeInList} />
+      buttonText= "Return to Coffee List"
+    } 
+    else if (this.state.selectedCoffee != null){
+      currentlyVisibleState = <CoffeeDetail coffee ={this.state.selectedCoffee} onClickingDelete= {this.handleDeletingCoffee}
+      onClickingEdit={this.handleEditClick} />
       buttonText= "Return to Coffee List"
     }
     else if(this.state.formVisibleOnPage){
@@ -58,7 +98,7 @@ class InventoryControl extends React.Component{
       buttonText= "Return to Coffee List"
     }
     else{
-      currentlyVisibleState= <CoffeeList coffeeList={this.state.mainCoffeeList} onCoffeeSelection={this.handleChangingSelectedCoffee} />
+      currentlyVisibleState= <CoffeeList coffeeList={this.state.mainCoffeeList} onCoffeeSelection={this.handleChangingSelectedCoffee} reductedCoffee={this.handleDepletingInventory}/>
       buttonText= "Add Coffee"
       
     }

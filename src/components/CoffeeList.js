@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 function CoffeeList(props){
   return(
     <>
+    <h2>Coffee List</h2>
       {props.coffeeList.map((coffee) =>
         <Coffee 
           whenCoffeeClicked = { props.onCoffeeSelection }
@@ -12,8 +13,10 @@ function CoffeeList(props){
           origin= {coffee.origin}
           price= {coffee.price}
           roast= {coffee.roast}
+          amount= {coffee.amount}
           id = {coffee.id}
-          key= {coffee.id} />
+          key= {coffee.id} 
+          sellPound = {props.depleteCoffee} />
 
       )}
     </>
@@ -22,7 +25,8 @@ function CoffeeList(props){
 
 CoffeeList.propTypes = {
   coffeeList: PropTypes.array,
-  onCoffeeSelection: PropTypes.func
+  onCoffeeSelection: PropTypes.func,
+  depleteCoffee: PropTypes.func
 };
 
 
