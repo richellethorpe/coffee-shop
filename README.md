@@ -25,7 +25,7 @@
 
 
 ## Component Tree Diagram
-<img src = (/coffee-shop.drawio.png) />
+ (/coffee-shop.drawio.png)
 
 
 ## Known Bugs
