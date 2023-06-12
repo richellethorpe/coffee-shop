@@ -30,7 +30,7 @@
 
 ## Known Bugs
 
-- Need to set inventory to 130 when coffee is ordered in bulk.
+- No known bugs.
 
 ## License
 
