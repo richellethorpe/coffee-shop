@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { v4 } from "uuid";
+import ReusableForm from "./ReusableForm";
 
 function NewCoffeeOrder(props){
   function handleNewCoffeeOrder(event){
@@ -10,32 +11,17 @@ function NewCoffeeOrder(props){
       origin: event.target.origin.value, 
       roast: event.target.roast.value, 
       price: event.target.price.value,
-      id: v4()
+      id: v4(),
+      qty: 130
     });
   }
 
   return(
     <>
-      <form onSubmit={handleNewCoffeeOrder}>
-        <input
-          type= 'text'
-          name= 'name'
-          placeholder= 'coffee name' />
-        <input
-          type= 'text'
-          name="origin"
-          placeholder="origin" />
-        <input
-          type= "text"
-          name="roast"
-          placeholder="roast" />  
-        <input
-          type= 'text'
-          name="price"
-          placeholder="price " />
+      <ReusableForm
+        formSubmissionHandler={handleNewCoffeeOrder}
+        buttonText = "Submit Order" />
 
-      <button type="submit">Purchase</button>
-      </form>
     </>
   );
 }

@@ -6,10 +6,12 @@ import InventoryControl from "./InventoryControl";
 
 function App() {
   return (
-    <>
-     <Header />
-     <InventoryControl />
-    </>
+    <React.Fragment>
+     
+      <Header />
+      <InventoryControl />
+      
+    </React.Fragment>
   );
 }
 

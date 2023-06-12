@@ -9,6 +9,8 @@
 - React
 - Markdown
 - JSX
+- JavaScript
+- HTML
 
 ## Description
 
@@ -23,12 +25,12 @@
 
 
 ## Component Tree Diagram
-<img src = (./src/img/coffee-shop.drawio.png) />
+<img src = (/coffee-shop.drawio.png) />
 
 
 ## Known Bugs
 
-- No known bugs.
+- Need to set inventory to 130 when coffee is ordered in bulk.
 
 ## License
 

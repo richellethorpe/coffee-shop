@@ -4,28 +4,30 @@ import PropTypes from "react";
 
 function EditCoffeeForm(props){
   const{coffee} = props;
+
   function handleEditFormSubmission(e){
     e.preventDefault();
-    props.onClickingEdit({
+    props.onEdit({
       name: e.target.name.value,
       origin: e.target.origin.value,
       price: e.target.price.value,
       roast: e.target.roast.value,
       id: coffee.id,
-      amount: coffee.amount
+    
     })
   }
     return (
       <>
+      <h2>Update Coffee Information</h2>
       <ReusableForm
         formSubmissionHandler={handleEditFormSubmission}
-        buttonText="edit Coffee" />
+        buttonText="Submit Edit" />
       </>
     );
   }
 
 EditCoffeeForm.propTypes = {
   coffee: PropTypes.object,
-  onClickingEdit: PropTypes.func
+  onEdit: PropTypes.func
 }
 export default EditCoffeeForm;

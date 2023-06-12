@@ -13,10 +13,10 @@ function CoffeeList(props){
           origin= {coffee.origin}
           price= {coffee.price}
           roast= {coffee.roast}
-          amount= {coffee.amount}
           id = {coffee.id}
           key= {coffee.id} 
-          sellPound = {props.depleteCoffee} />
+          qty= {coffee.qty} 
+          sellPound={props.reducedCoffee}/>
 
       )}
     </>
@@ -26,7 +26,7 @@ function CoffeeList(props){
 CoffeeList.propTypes = {
   coffeeList: PropTypes.array,
   onCoffeeSelection: PropTypes.func,
-  depleteCoffee: PropTypes.func
+  reducedCoffee: PropTypes.func
 };
 
 

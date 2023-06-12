@@ -11,7 +11,9 @@ class InventoryControl extends React.Component{
       formVisibleOnPage: false,
       mainCoffeeList: [],
       selectedCoffee: null,
-      editing: false
+      editing: false,
+      coffeeToBeSold: null,
+      qty: 130
     };
   }
 
@@ -20,7 +22,8 @@ class InventoryControl extends React.Component{
       this.setState({
         formVisibleOnPage: false,
         selectedCoffee: null,
-        editing: false
+        editing: false,
+        coffeeToBeSold : false
       });
     } else {
       this.setState(prevState => ({
@@ -50,28 +53,21 @@ class InventoryControl extends React.Component{
     });
   }
 
-  handleDepletingInventory = (id)=> {   
-    const selectedCoffee = this.state.mainInventoryList.filter(item => item.id === id)[0];
-    const reductedCoffee = { ...selectedCoffee, amount: (selectedCoffee.amount === 0) ? 0 : selectedCoffee.amount - 1 };
-    this.setState({ selectedCoffee: selectedCoffee });
-    const editedMainCoffeeList = this.state.mainCoffeeList
-      .filter(coffee => coffee.id !== reductedCoffee.id)
-      .concat(reductedCoffee);
+  handleDepleteCoffeeClick = () => {
+    this.setState({coffeeToBeSold: true})
+  }
+
+  handleDepletingInventory = (id)=> {  
+    const selectedCoffee = this.state.mainCoffeeList.filter(coffee => coffee.id === id)[0];
+    const reducedCoffeeInventory = { ...selectedCoffee, qty: (selectedCoffee.qty === 0) ? 0 : selectedCoffee.qty - 1}
+    this.setState({selectedCoffee: selectedCoffee});
+    const reducedCoffeeInventoryList = this.state.mainCoffeeList
+                                  .filter(coffee => coffee.id !== reducedCoffeeInventory.id)
+                                  .concat(reducedCoffeeInventory);
     this.setState({
-      mainCoffeeList: editedMainCoffeeList,
+      mainCoffeeList : reducedCoffeeInventoryList,
       editing: false,
       selectedCoffee: null
-    });
-  } 
-
-  handleEditingCoffeeInList = (coffeeToEdit) => {
-    const editedMainCoffeeList = this.state.mainCoffeeList
-      .filter(coffee => coffee.id !== this.state.selectedCoffee.id)
-      .concat(coffeeToEdit);
-    this.setState({
-      mainCoffeeList: editedMainCoffeeList,
-      editing: false,
-      selectedItem: null
     });
   }
 
@@ -80,25 +76,44 @@ class InventoryControl extends React.Component{
     this.setState({ editing: true });
   }
 
+  handleEditCoffee = (coffeeToEdit) => {
+    const newEditedMainCoffeeList = this.state.mainCoffeeList
+                            .filter(coffee => coffee.id !== this.state.selectedCoffee)
+                            .concat(coffeeToEdit);
+    this.setState({
+      mainCoffeeList: newEditedMainCoffeeList,
+      editing : false,
+      selectedCoffee: null
+    });
+  }
+
   render(){
     let currentlyVisibleState= null;
     let buttonText= null;
+  
 
     if (this.state.editing){
-      currentlyVisibleState= <EditCoffeeForm coffee={this.state.selectedCoffee} onClickingEdit={this.handleEditingCoffeeInList} />
+      currentlyVisibleState= <EditCoffeeForm 
+        coffee={this.state.selectedCoffee} 
+        onEdit={this.handleEditingCoffeeInList} />
       buttonText= "Return to Coffee List"
     } 
     else if (this.state.selectedCoffee != null){
-      currentlyVisibleState = <CoffeeDetail coffee ={this.state.selectedCoffee} onClickingDelete= {this.handleDeletingCoffee}
-      onClickingEdit={this.handleEditClick} />
+      currentlyVisibleState = <CoffeeDetail 
+        coffee ={this.state.selectedCoffee} 
+        onClickingDelete= {this.handleDeletingCoffee}
+        onClickingEdit={this.handleEditClick}
+        qty = {this.state.qty}  />
       buttonText= "Return to Coffee List"
     }
     else if(this.state.formVisibleOnPage){
-      currentlyVisibleState = <NewCoffeeOrder onNewCoffeeCreation= {this.handleAddingNewCoffeeToList}/>;
+      currentlyVisibleState = <NewCoffeeOrder 
+        onNewCoffeeCreation= {this.handleAddingNewCoffeeToList}/>;
       buttonText= "Return to Coffee List"
     }
     else{
-      currentlyVisibleState= <CoffeeList coffeeList={this.state.mainCoffeeList} onCoffeeSelection={this.handleChangingSelectedCoffee} reductedCoffee={this.handleDepletingInventory}/>
+      currentlyVisibleState= <CoffeeList coffeeList={this.state.mainCoffeeList} onCoffeeSelection={this.handleChangingSelectedCoffee} reducedCoffee={this.handleDepletingInventory}/>
+      
       buttonText= "Add Coffee"
       
     }
